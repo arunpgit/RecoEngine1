@@ -1,0 +1,5 @@
+D:\new Projects\Recommendation Engine\RecoEngine\Build\Debug\obj\CustomColumns.csprojResolveAssemblyReference.cache
+D:\new Projects\Recommendation Engine\RecoEngine\Build\Debug\obj\CustomColumns.dll
+D:\new Projects\Recommendation Engine\RecoEngine\Build\Debug\obj\CustomColumns.pdb
+D:\new Projects\Recommendation Engine\RecoEngine\Build\Debug\CustomColumns.dll
+D:\new Projects\Recommendation Engine\RecoEngine\Build\Debug\CustomColumns.pdb

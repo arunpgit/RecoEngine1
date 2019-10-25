@@ -1,0 +1,13 @@
+D:\new Projects\Recommendation Engine\RecoEngine\CustomColumns\bin\Debug\obj\CustomColumns.dll
+D:\new Projects\Recommendation Engine\RecoEngine\CustomColumns\bin\Debug\obj\CustomColumns.pdb
+D:\new Projects\Recommendation Engine\RecoEngine\CustomColumns\bin\Debug\CustomColumns.dll
+D:\new Projects\Recommendation Engine\RecoEngine\CustomColumns\bin\Debug\CustomColumns.pdb
+D:\new Projects\Recommendation Engine\RecoEngine\CustomColumns\bin\Debug\CalithaLib.dll
+D:\new Projects\Recommendation Engine\RecoEngine\CustomColumns\bin\Debug\GoldParserEngine.dll
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\CustomColumns\bin\Debug\obj\CustomColumns.csprojResolveAssemblyReference.cache
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\CustomColumns\bin\Debug\obj\CustomColumns.dll
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\CustomColumns\bin\Debug\obj\CustomColumns.pdb
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\CustomColumns\bin\Debug\CustomColumns.dll
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\CustomColumns\bin\Debug\CustomColumns.pdb
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\CustomColumns\bin\Debug\CalithaLib.dll
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\CustomColumns\bin\Debug\GoldParserEngine.dll

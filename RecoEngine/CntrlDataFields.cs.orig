@@ -1,0 +1,447 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using RecoEngine_DataLayer;
+using RecoEngine_BI;
+using Telerik.WinControls.UI;
+using Telerik.WinControls;
+using NhibernateclassGeneration;
+using NhibernateclassGeneration.Domain;
+using NhibernateclassGeneration.Reader;
+using System.Configuration;
+using System.IO;
+
+namespace RecoEngine
+{
+    public partial class CntrlDataFields : UserControl
+    {
+        private IMetadataReader metadataReader;
+        clsDataSource clsDSOBJ = new clsDataSource();
+        public event EventHandler DataFieldsNxtBtnClick;
+        bool bIsLoaded = false;
+        public CntrlDataFields()
+        {
+            InitializeComponent();
+
+
+        }
+        private void CntrlDataFields_Load(object sender, EventArgs e)
+        {
+
+            try
+            {
+                gbMain.Padding = new Padding(0, 0, 0, 0);
+                fnLoadTableName();
+                dataschemaGridbinding();
+                bIsLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                Common.LogMessage(ex);
+            }
+        }
+        void fnLoadTableName()
+        {
+            try
+            {
+                DataTable dtTbl = new DataTable();
+
+                dtTbl = clsDSOBJ.fnGetTableNames();
+
+                ddlTableName.DataSource = dtTbl;
+                ddlTableName.ValueMember = "TNAME";
+                ddlTableName.DisplayMember = "TNAME";
+
+                if (Common.strTableName != "")
+                    ddlTableName.SelectedValue = Common.strTableName;
+                else
+                    ddlTableName.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        void dataschemaGridbinding()
+        {
+            try
+            {
+                DataTable dt = clsDSOBJ.fnGetTreDetailsSchema(ddlTableName.SelectedValue.ToString());
+                DataTable dt1 = clsDSOBJ.fnGetColMappingData();
+                dt.Columns.Add(new DataColumn("Flag", typeof(string)));
+                dt.Columns.Add(new DataColumn("Type", typeof(int)));
+                dt.Columns.Add(new DataColumn("Required", typeof(bool)));
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    if (dt1.Rows.Count > 0)
+                    {
+                        DataRow[] dr = dt1.Select("COLNAME='" + dt.Rows[i][0].ToString() + "'");
+                        if (dr.Length > 0 && dr[0]["TABLENAME"].ToString().ToLower() == ddlTableName.SelectedValue.ToString().ToLower())
+                        {
+                            dt.Rows[i]["Type"] = dr[0]["Type"];
+                            dt.Rows[i]["Required"] = dr[0]["ISREQUIRED"];
+                           dt.Rows[i]["Flag"] = "Y";
+                        }
+                        else
+                        {
+                            dt.Rows[i]["Type"] = (int)Enums.ColType.None;
+                            dt.Rows[i]["Flag"] = "";
+                            dt.Rows[i]["Required"] = false;
+                        }
+                    }
+                    else
+                    {
+                        dt.Rows[i]["Type"] = (int)Enums.ColType.None;
+                        dt.Rows[i]["Flag"] = "";
+                        dt.Rows[i]["Required"] = false;
+                    }
+                }
+                dataschemaGrid.DataSource = dt;
+                GridViewComboBoxColumn categoryColumn = new GridViewComboBoxColumn();
+                categoryColumn.HeaderText = "Type";
+                categoryColumn.ValueMember = "TypeId";
+                categoryColumn.DisplayMember = "Type";
+                categoryColumn.FieldName = "Type";
+                categoryColumn.DataSource = clsDSOBJ.fnCreateColTypes();
+                categoryColumn.Width = 150;
+                if (dataschemaGrid.MasterTemplate.Columns.Contains("Type1"))
+                    dataschemaGrid.MasterTemplate.Columns.Remove("Type1");
+                dataschemaGrid.MasterTemplate.Columns.Add(categoryColumn);
+                dataschemaGrid.Columns["ColumnName"].ReadOnly = true;
+                dataschemaGrid.Columns["DataType"].ReadOnly = true;
+                dataschemaGrid.Columns["Type"].ReadOnly = true;
+                dataschemaGrid.Columns["Type"].IsVisible = false;
+                dataschemaGrid.Columns["Flag"].IsVisible = false;
+                dataschemaGrid.Columns[0].Width = 100;
+                dataschemaGrid.Columns[1].AutoSizeMode = BestFitColumnMode.DisplayedDataCells;
+                dataschemaGrid.Columns["DataType"].Width = 150;
+                dataschemaGrid.Columns.Remove("NumericPrecision");
+                dataschemaGrid.Columns.Remove("NumericScale");
+                dataschemaGrid.Columns.Remove("ProviderType");
+                dataschemaGrid.Columns.Remove("IsLong");
+                dataschemaGrid.Columns.Remove("AllowDBNull");
+                dataschemaGrid.Columns.Remove("IsReadOnly");
+                dataschemaGrid.Columns.Remove("IsUnique");
+                dataschemaGrid.Columns.Remove("IsKey");
+                dataschemaGrid.Columns.Remove("IsAutoIncrement");
+                dataschemaGrid.Columns.Remove("IsRowVersion");
+                dataschemaGrid.Columns.Remove("ColumnMapping");
+                dataschemaGrid.Columns.Remove("AutoIncrementSeed");
+                dataschemaGrid.Columns.Remove("AutoIncrementStep");
+                dataschemaGrid.Columns.Remove("BaseCatalogName");
+                dataschemaGrid.Columns.Remove("BaseSchemaName");
+                dataschemaGrid.Columns.Remove("BaseTableName");
+                dataschemaGrid.Columns.Remove("BaseTableNameSpace");
+                dataschemaGrid.Columns.Remove("BaseColumnName");
+                dataschemaGrid.Columns.Remove("BaseColumnNameSpace");
+                dataschemaGrid.Columns.Remove("Expression");
+                dataschemaGrid.Columns.Remove("DefaultValue");
+                dataschemaGrid.Columns.Remove("ColumnOrdinal");
+                dataschemaGrid.Columns.Remove("ColumnSize");
+                dataschemaGrid.CellValueChanged += new GridViewCellEventHandler(dataschemaGrid_CellValueChanged);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        void dataschemaGrid_CellValueChanged(object sender, GridViewCellEventArgs e)
+        {
+
+            if (dataschemaGrid.CurrentRow != null)
+            {
+                GridViewRowInfo drRow = dataschemaGrid.CurrentRow;
+                drRow.Cells["Flag"].Value = "Y";
+
+            }
+       
+            //if ((e.Column.Name.ToLower() == "type1"))
+            //{
+            //    if (Convert.ToInt16(e.Value) == (int)Enums.ColType.None)
+            //    {
+            //        drRow.Cells["Flag"].Value = "N";
+            //    }
+            //    else
+            //    {
+            //        drRow.Cells["Flag"].Value = "Y";
+            //    }
+
+            //}
+            //else if (e.Column.Name.ToLower() == "required")
+            //{
+            //    if (Convert.ToInt16(drRow.Cells["type1"].Value) == (int)Enums.ColType.None)
+            //    {
+            //        drRow.Cells["Flag"].Value = "N";
+            //    }
+            //    else
+            //        drRow.Cells["Flag"].Value = "Y";
+            //}
+
+        }
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                generateMapclass();
+                string strTabName = ddlTableName.SelectedValue.ToString().ToUpper();
+                //strTabName = "tre_random".ToUpper();;
+                DataTable dt = (DataTable)dataschemaGrid.DataSource;
+                DataRow[] drs = dt.Select("TYPE=" + (int)Enums.ColType.Key);
+                if (drs.Length == 0)
+                {
+                    Telerik.WinControls.RadMessageBox.Show(this, "Should map 'Key' to at least one column.", "Information", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
+                }
+                
+                drs = dt.Select("TYPE=" + (int)Enums.ColType.Time);
+
+                if (drs.Length > 1)
+                {
+                   // Telerik.WinControls.RadMessageBox.Show(this, "Should not map 'Time' to more than one column.", "Information", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
+                }
+                else if (drs.Length == 0)
+                {
+                    Telerik.WinControls.RadMessageBox.Show(this, "Should map 'Time' to at least one column.", "Information", MessageBoxButtons.OK, RadMessageIcon.Info, MessageBoxDefaultButton.Button1);
+                }
+
+             
+                drs = dt.Select("Flag='Y'");
+                if (drs.Length > 0)
+                {
+                    clsDSOBJ.fnInsertTreMApping(drs, strTabName, Common.strfiltertxt);
+                   // clsDSOBJ.fnCreateTreMApping(drs, strTabName,Common.strfiltertxt);
+                    Common.strTableName = ddlTableName.SelectedValue.ToString();
+                  //  Common.strTableName = "tre_random";
+                    Common.bIsTableMapped = true;
+                    Common.SetLoginDetailsToRegistry();
+                    dataschemaGridbinding();
+                }
+            }
+            catch (Exception ex)
+            {
+                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+            }
+        }
+
+        private void ddlTableName_SelectedIndexChanged(object sender, Telerik.WinControls.UI.Data.PositionChangedEventArgs e)
+        {
+            try
+            {
+
+                if (bIsLoaded)
+                {
+                    dataschemaGridbinding();
+                    Common.strTableName = ddlTableName.SelectedValue.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+            }
+        }
+
+        private void generateMapclass()
+        {
+           
+            var Mapclasssettings = new Connection();
+           string mapTempPath = Path.GetTempPath();
+           if (mapTempPath.EndsWith(@"\") == false)
+           { mapTempPath += @"\"; }
+           mapTempPath += @"Mapping\";
+           if (Directory.Exists(mapTempPath) == false)
+           {
+               Directory.CreateDirectory(mapTempPath);
+           }
+            Mapclasssettings.Domainfolderpath = mapTempPath;
+            Mapclasssettings.ConnectionString = ConfigurationManager.AppSettings["ConnectionString"]; 
+            Mapclasssettings.EntityName = "Entity";
+            if ((RecoEngine_BI.Common.iDBType) == (int)Enums.DBType.Oracle)
+            {
+                Mapclasssettings.Type = ServerType.Oracle;
+            }
+            metadataReader = MetadataFactory.GetReader(Mapclasssettings.Type, Mapclasssettings.ConnectionString);
+            var owners = metadataReader.GetOwners();
+            IList<Table> tblList = metadataReader.GetTables("RECOUSR");
+            int tableindex = 0;
+            for (int i = 0; i < tblList.Count; i++)
+            {
+                if (tblList[i].Name == "OPPORTUNITY")
+                {
+                    tableindex = i;
+                    break;
+                }
+            }
+            Table table = tblList[tableindex];
+            table.PrimaryKey = metadataReader.DeterminePrimaryKeys(table);
+            metadataReader.GetTableDetails(table, "RECOUSR");
+            var applicationPreferences = GetApplicationPreferences(table, false, Mapclasssettings);
+            new ApplicationController(applicationPreferences, table).Generate();
+        }
+
+        private void Generate(Table table, bool generateAll, Connection appSettings)
+        {
+            try
+            {
+                var applicationPreferences = GetApplicationPreferences(table, generateAll, appSettings);
+                new ApplicationController(applicationPreferences, table).Generate();
+            }
+            catch (Exception ex)
+            {
+                
+                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+         
+            }
+            
+        }
+        private ApplicationPreferences GetApplicationPreferences(Table tableName, bool all, Connection appSettings)
+        {
+            
+                var applicationPreferences = new ApplicationPreferences
+                {
+                    ServerType = appSettings.Type,
+                    DomainFolderPath = appSettings.Domainfolderpath,
+                    TableName = tableName.Name,
+                    NameSpace = appSettings.EntityName,
+                    FieldNamingConvention = FieldNamingConvention.SameAsDatabase,
+                    FieldGenerationConvention = FieldGenerationConvention.AutoProperty,
+                    ConnectionString = appSettings.ConnectionString,
+                };
+
+                return applicationPreferences;
+
+            
+        }
+
+        private void btnAddColumn_Click(object sender, EventArgs e)
+        {
+            bindingExpressionEditor((int)Enums.ExpressionType.AddColumn);
+            //try
+            //{
+            //    string strExpression = "";
+            //    clsDataSource clsObj = new clsDataSource();
+
+            //    DataTable dtSource = clsObj.fnGetColMappingData();
+
+            //    DataTable dt = new DataTable();
+
+            //    for (int i = 0; i < dtSource.Rows.Count; i++)
+            //    {
+            //        if ((dtSource.Rows[i]["TYPE"].ToString() == ((int)Enums.ColType.Key).ToString()) ||
+            //            (dtSource.Rows[i]["TYPE"].ToString() == ((int)Enums.ColType.Input).ToString() && dtSource.Rows[i]["ISREQUIRED"].ToString() == "1"))
+            //        {
+            //            if (dtSource.Rows[i]["COLDATATYPE"].ToString().ToUpper() == "System.Decimal".ToUpper())
+            //            {
+            //                dt.Columns.Add(new DataColumn(dtSource.Rows[i]["COLNAME"].ToString(), typeof(decimal)));
+            //            }
+            //            else if (dtSource.Rows[i]["COLDATATYPE"].ToString().ToUpper() == "System.DateTime".ToUpper())
+            //                dt.Columns.Add(new DataColumn(dtSource.Rows[i]["COLNAME"].ToString(), typeof(DateTime)));
+            //            else if (dtSource.Rows[i]["COLDATATYPE"].ToString().ToUpper() == "System.String".ToUpper())
+            //            {
+            //                dt.Columns.Add(new DataColumn(dtSource.Rows[i]["COLNAME"].ToString(), typeof(string)));
+            //            }
+            //            else if (dtSource.Rows[i]["COLDATATYPE"].ToString().ToUpper() == "System.int".ToUpper() ||
+            //                dtSource.Rows[i]["COLDATATYPE"].ToString().ToUpper() == "System.Int16".ToUpper() ||
+            //                dtSource.Rows[i]["COLDATATYPE"].ToString().ToUpper() == "System.Int32".ToUpper() ||
+            //                dtSource.Rows[i]["COLDATATYPE"].ToString().ToUpper() == "System.Int64".ToUpper())
+            //            {
+            //                dt.Columns.Add(new DataColumn(dtSource.Rows[i]["COLNAME"].ToString(), typeof(int)));
+            //            }
+            //        }
+            //    }
+
+            //    //using (var frm = new frmExpressEditor(false, Common.strTableName, strExpression))
+            //    //{
+            //    //    frm._fieldDict = Common.GetDict(dt);
+            //    //    frm.AvailableFields = frm._fieldDict.ToList<KeyValuePair<string, Type>>();
+            //    //    frm.dtSource = dtSource;
+            //    //    var res = frm.ShowDialog();
+            //    //    if (res == System.Windows.Forms.DialogResult.OK)
+            //    //    {
+            //    //        strExpression = frm.strExpression.Replace("FIELD!", "").Trim();
+            //    //        string strColName = frm.strColName;
+            //    //        //TRE_CALCULATED_COLUMNS
+
+            //    //        string strMsg = "";
+            //    //        if (!clsObj.fnAddColumnToMainTable(Common.strTableName, strColName, strExpression, ref  strMsg))
+            //    //        {
+            //    //            if (strMsg != "")
+            //    //                Telerik.WinControls.RadMessageBox.Show(this, strMsg, "Information", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+            //    //            return;
+            //    //        }
+
+            //    //        dataschemaGridbinding();
+            //    //    }
+            //    //}
+            //}
+            //catch (Exception ex)
+            //{
+            //    Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+            //}
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+
+            bindingExpressionEditor((int)Enums.ExpressionType.Filter);
+
+       }
+        void bindingExpressionEditor(int iExpressionType)
+        {
+            try
+            {
+                clsDataSource clsObj = new clsDataSource();
+                DataTable dtSource = clsObj.fnGetColMappingData();
+                DataTable dt = clsDSOBJ.fnGetTreDetails(Common.strTableName);
+                DataTableReader dr = new DataTableReader(dt);
+                DataTable dtSchema = dr.GetSchemaTable();
+                string strExpression = "";
+                using (var frm = new frmExpressEditor(iExpressionType, Common.strTableName, strExpression))
+                {
+                    frm._fieldDict = Common.GetDict(dt);
+                    frm.AvailableFields = frm._fieldDict.ToList<KeyValuePair<string, Type>>();
+                    frm.dtSource = dtSchema;
+                    var res = frm.ShowDialog();
+               if (res == System.Windows.Forms.DialogResult.OK)
+                {
+                    if (iExpressionType == (int)Enums.ExpressionType.Filter)
+                        Common.strfiltertxt = frm.strExpression;
+                    else
+                    {
+                      //  Common.strfiltertxt = "";
+                        string strColName = frm.strColName;
+                       
+                        string strMsg = "";
+                        strExpression = frm.strExpression;
+                        if (!clsObj.fnAddColumnToMainTable(Common.strTableName, strColName, strExpression, ref  strMsg))
+                        {
+                            if (strMsg != "")
+                                Telerik.WinControls.RadMessageBox.Show(this, strMsg, "Information", MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+                            return;
+                        }
+
+                        dataschemaGridbinding();
+                    }
+                }
+                }
+            }
+            catch (Exception ex)
+            {
+                Telerik.WinControls.RadMessageBox.Show(this, ex.Message, ex.TargetSite.Name.ToString(), MessageBoxButtons.OK, RadMessageIcon.Error, MessageBoxDefaultButton.Button1);
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if (DataFieldsNxtBtnClick != null)
+                DataFieldsNxtBtnClick(this, e);
+        }
+
+    }
+}

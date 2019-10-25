@@ -1,0 +1,75 @@
+"Name"    = 'GOLD Parser Build v4.1.1 Grammar'
+"Author"  = 'Toni Cassisi'
+"Version" = '1.0' 
+"About"   = 'Based on RDL'
+
+! Designed for Calitha Event parser implementation
+! To update, use template "C-Sharp - Constants Only with Inline Documentation"
+
+! Based on cut-down version of RDL
+! http://msdn.microsoft.com/en-us/library/aa711636(v=VS.71).aspx
+
+"Case Sensitive" = False 
+"Start Symbol"   = <Statements>
+
+{String Ch 2} = {Printable} - ["]
+
+Id            = {Letter}{AlphaNumeric}*
+StringLiteral = '"'  {String Ch 2}* '"'
+NumberLiteral = {Digit}+('.'{Digit}+)?
+
+<Statements> ::= '=' <Expression>
+               
+<Expression>   ::= <Expression> '>'  <Shift Exp> 
+                |  <Expression> '<'  <Shift Exp>
+                |  <Expression> '<=' <Shift Exp>
+                |  <Expression> '>=' <Shift Exp>
+                |  <Expression> '=' <Shift Exp>
+                |  <Expression> 'Like' <Shift Exp>
+                |  <Expression> '<>' <Shift Exp>
+                |  <Shift Exp>
+
+<Shift Exp>      ::= 'Not' <Add Exp> 
+                  |  <Shift Exp> 'AndAlso' <Add Exp>
+                  |  <Shift Exp> 'OrElse' <Add Exp>
+                  |  <Add Exp>
+
+
+<Add Exp>      ::= <Add Exp> '+' <Mult Exp>
+                |  <Add Exp> '-' <Mult Exp>
+                |  <Add Exp> '&' <Mult Exp>
+                |  <Add Exp> 'Mod' <Mult Exp>
+                |  <Mult Exp>
+
+<Mult Exp>    ::= <Mult Exp> '*' <Negate Exp> 
+               |  <Mult Exp> '/' <Negate Exp>
+               |  <Mult Exp> '\' <Negate Exp>
+               |  <Mult Exp> '^' <Negate Exp>
+               |  <Negate Exp>
+
+<Negate Exp>  ::= '-' <Function>
+               |  <Function>
+
+<FId> ::= <FId> '.' ID
+          | ID
+
+<Function>     ::= <FId> '()'
+                |  <FId> '(' <Arg> ')'
+                |  <Value>
+
+<FieldFunction>     ::= ID
+                     |  ID '()'
+                     |  ID '(' <Arg> ')'
+                
+<Arg>  ::= <Arg> ',' <Expression>
+        |  <Expression>
+       
+<Field>       ::= ID '!' ID 
+
+<Value>       ::= <Field> 
+               |  <Field> '.' <FieldFunction>
+               |  StringLiteral
+               |  NumberLiteral
+               |  '(' <Expression> ')'
+
+

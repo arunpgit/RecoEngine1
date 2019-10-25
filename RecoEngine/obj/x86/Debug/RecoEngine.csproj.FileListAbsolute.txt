@@ -1,0 +1,206 @@
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.exe.config
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.exe.manifest
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.application
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.exe
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.pdb
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\bin\Debug\CustomColumns.dll
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_BI.dll
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_DataLayer.dll
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\bin\Debug\GoldParserEngine.dll
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\bin\Debug\CalithaLib.dll
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\bin\Debug\CustomColumns.pdb
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_BI.pdb
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_DataLayer.pdb
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.AlertForm.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlchkDropDown.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.cntrlDataConenction.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlDataFields.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlDataSource.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlExport.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlOfferLibrary.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlOpportunityList.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlPreviewExpression.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlRecommendation.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlReports.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlSetup.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.cntrlUsers.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.ctrlThreshold.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmDatsource.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmExpressEditor.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmLogin.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmOriginal.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmProject.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmUsers.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.Properties.Resources.resources
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.csproj.GenerateResource.Cache
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.exe.manifest
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.application
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.exe
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.pdb
+D:\arun.p\Arun\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.csprojResolveAssemblyReference.cache
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.exe.config
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.exe
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.pdb
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.exe.manifest
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.application
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.exe
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.pdb
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\bin\Debug\CustomColumns.dll
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_BI.dll
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_DataLayer.dll
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\bin\Debug\GoldParserEngine.dll
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\bin\Debug\CalithaLib.dll
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\bin\Debug\CustomColumns.pdb
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_BI.pdb
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_DataLayer.pdb
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.csprojResolveAssemblyReference.cache
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.AlertForm.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlchkDropDown.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.cntrlDataConenction.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlDataFields.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlDataSource.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlExport.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlOfferLibrary.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlOpportunityList.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlPreviewExpression.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlRecommendation.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlReports.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlSetup.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.cntrlUsers.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.ctrlThreshold.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmDatsource.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmExpressEditor.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmLogin.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmOriginal.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmProject.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmUsers.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.Properties.Resources.resources
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.csproj.GenerateResource.Cache
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.exe.manifest
+E:\Projects\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.application
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.exe.config
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.exe.manifest
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.application
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.exe
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.pdb
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\bin\Debug\CustomColumns.dll
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_BI.dll
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_DataLayer.dll
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\bin\Debug\GoldParserEngine.dll
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\bin\Debug\CalithaLib.dll
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\bin\Debug\CustomColumns.pdb
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_BI.pdb
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_DataLayer.pdb
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.csprojResolveAssemblyReference.cache
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.AlertForm.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlchkDropDown.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.cntrlDataConenction.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlDataFields.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlDataSource.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlExport.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlOfferLibrary.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlOpportunityList.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlPreviewExpression.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlRecommendation.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlReports.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlSetup.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.cntrlUsers.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.ctrlThreshold.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmDatsource.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmExpressEditor.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmLogin.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmOriginal.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmProject.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmUsers.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.Properties.Resources.resources
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.csproj.GenerateResource.Cache
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.exe.manifest
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.application
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.exe
+C:\Users\sravanthi.a\Downloads\RecoEngine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.pdb
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.exe.config
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.exe.manifest
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.application
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.exe
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\bin\Debug\RecoEngine.pdb
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\bin\Debug\CustomColumns.dll
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_BI.dll
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_DataLayer.dll
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\bin\Debug\GoldParserEngine.dll
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\bin\Debug\CalithaLib.dll
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\bin\Debug\CustomColumns.pdb
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_BI.pdb
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\bin\Debug\RecoEngine_DataLayer.pdb
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.csprojResolveAssemblyReference.cache
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.AlertForm.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlchkDropDown.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.cntrlDataConenction.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlDataFields.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlDataSource.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlExport.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlOfferLibrary.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlOpportunityList.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlPreviewExpression.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlRecommendation.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlReports.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlSetup.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.cntrlUsers.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.ctrlThreshold.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmDatsource.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmExpressEditor.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmLogin.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmOriginal.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmProject.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmUsers.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.Properties.Resources.resources
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.csproj.GenerateResource.Cache
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.exe.manifest
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.application
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.exe
+D:\new Projects\Recommendation Engine\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.pdb
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\RecoEngine.exe.config
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.exe
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.pdb
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\RecoEngine.exe.manifest
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\RecoEngine.application
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\RecoEngine.exe
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\RecoEngine.pdb
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\CustomColumns.dll
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\RecoEngine_BI.dll
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\RecoEngine_DataLayer.dll
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\Telerik.WinControls.ChartView.dll
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\Telerik.WinControls.dll
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\Telerik.WinControls.GridView.dll
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\Telerik.WinControls.Themes.Office2010Blue.dll
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\Telerik.WinControls.UI.dll
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\TelerikCommon.dll
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\GoldParserEngine.dll
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\CalithaLib.dll
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\CustomColumns.pdb
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\RecoEngine_BI.pdb
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\bin\Debug\RecoEngine_DataLayer.pdb
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.csprojResolveAssemblyReference.cache
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.AlertForm.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlchkDropDown.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.cntrlDataConenction.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlDataFields.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlDataSource.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlExport.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlOfferLibrary.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlOpportunityList.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlPreviewExpression.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlRecommendation.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlReports.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.CntrlSetup.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.cntrlUsers.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.ctrlThreshold.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmDatsource.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmExpressEditor.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmLogin.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmOriginal.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmProject.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.frmUsers.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.Properties.Resources.resources
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.csproj.GenerateResource.Cache
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.exe.manifest
+C:\Users\Arun Pachika\Desktop\reco\RecoEngine\RecoEngine\obj\x86\Debug\RecoEngine.application

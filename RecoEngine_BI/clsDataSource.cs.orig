@@ -1,0 +1,788 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Data;
+using RecoEngine_DataLayer;
+
+
+namespace RecoEngine_BI
+{
+    public class clsDataSource
+    {
+        public DataTable fnGetTreDetailsSchema(string strTabName)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                string strSql = "";
+
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    strSql = "select * from " + strTabName + " where ROWNUM <= 2";
+                    dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                }
+                else
+                {
+                    strSql = "select top 1 * from " + strTabName;
+                    dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                }
+                DataTableReader dr = new DataTableReader(dt);
+                DataTable dtSchema = dr.GetSchemaTable();
+                dr.Close();
+                dr = null;
+                return dtSchema;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public DataTable fnGetTreDetails(string strTabName)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                string strSql = "";
+
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    strSql = "select * from " + strTabName + " where ROWNUM <= 100";
+                    dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                }
+                else
+                {
+                    strSql = "select top 100 * from " + strTabName;
+                    dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                }
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+
+        }
+
+        public void fnDeleteTreMapping(string strTabName)
+        {
+            try
+            {
+                string strSql = "delete from TRE_MAPPING where TABLENAME='" + strTabName + "'";
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                else
+                    ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool fnAddColumnToMainTable(string strTabName, string strColName, string strFormula, ref string strMessage)
+        {
+            try
+            {
+                int iCount = 0;
+                string strSql = " Select count(1) from user_tab_columns where table_name = '" + strTabName + "' and column_name = '" + strColName + "'";
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                }
+                if (iCount > 0)
+                {
+                    strMessage = strColName + " is already there.";
+                    return false;
+                }
+                ((OraDBManager)Common.dbMgr).BeginTrans();
+                strSql = "Insert into TRE_CALCULATED_COLUMNS (COLNAME,COMBINE_COLUMNS) values ('" + strColName.ToUpper() + "','" + strFormula + "')";
+
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                }
+
+                strSql = " Alter Table " + strTabName + " add " + strColName.ToUpper() + " number (18,2) ";
+                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                strSql = " Update " + strTabName + " Set " + strColName.ToUpper() + " = " + strFormula;
+                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+
+
+                ((OraDBManager)Common.dbMgr).CommitTrans();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ((OraDBManager)Common.dbMgr).RollbackTrans();
+                throw ex;
+            }
+
+        }
+
+        public DataTable fnGetColMappingData()
+        {
+            try
+            {
+                DataTable dt;
+                string strSql = "";
+
+                strSql = "Select * from TRE_MAPPING ";
+
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                    dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                else
+                    dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataTable fnValidateExpressEditor(string strString, string strTableName)
+        {
+            try
+            {
+                DataTable dt;
+                string strSql = "";
+
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    strSql = "Select  " + strString + " from " + strTableName + " Where ROWNUM <=2";
+                    dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                }
+                else
+                {
+                    strSql = "Select Top 1 " + strString + " from " + strTableName;
+                    dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                }
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        //public DataTable fnGetExpressionEditorColumns()
+        //{
+        //    try
+        //    {
+        //        DataTable dt;
+        //        string strSql = "";
+
+        //        strSql = "Select * from TRE_MAPPING";// Where ISREQUIRED=1 AND TYPE=" + (int)Enums.ColType.Input;
+
+        //        if (Common.iDBType == (int)Enums.DBType.Oracle)
+        //            dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+        //        else
+        //            dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+
+        //        return dt;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+
+        public void fnInsertTreMApping(DataRow[] drs, string strTabName)
+        {
+            try
+            {
+                string strSql = "";
+                //  fnDeleteTreMapping(strTabName);
+                string strCreateTString = "Create Table ETS_ADM_WEEKLY_A (";
+                string strCreateBString = "Create Table ETS_ADM_WEEKLY_B (";
+                string strKeyString = "";
+                string strSegmentString = "";
+                string strCreateTString1 = "";
+                string strCreateBString1 = "";
+                string strSellPtnlTableString = "";
+                string strSellPtnlUserTableString = "";
+                string strBaseString = "Create Table ETS_TRE_BASE (";
+                string strBase2String = "Create Table ETS_TRE_BASE2 (";
+                string strBase3String = "Create Table ETS_TRE_BASE3 (";
+
+                string strBaseString1 = "";
+                string strBase2String1 = "";
+                string strBase3String1 = "";
+
+
+
+                int iETS_ADM_WEEKLYExisits = 0;
+                int iETS_TRE_X_SELL_PNTLExisits = 0;
+                int iETS_TRE_BASE_Exisits = 0;
+                int iETS_TRE_BASE2_Exisits = 0;
+                int iETS_TRE_BASE3_Exisits = 0;
+                strSql = " SELECT count(1) FROM ALL_TABLES where table_name = 'ETS_ADM_WEEKLY_A' ";
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    iETS_ADM_WEEKLYExisits = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                }
+                strSql = " SELECT count(1) FROM ALL_TABLES where table_name = 'ETS_TRE_X_SELL_PNTL' ";
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    iETS_TRE_X_SELL_PNTLExisits = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                }
+
+                strSql = " SELECT count(1) FROM ALL_TABLES where table_name = 'ETS_TRE_BASE' ";
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    iETS_TRE_BASE_Exisits = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                }
+
+                strSql = " SELECT count(1) FROM ALL_TABLES where table_name = 'ETS_TRE_BASE2' ";
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    iETS_TRE_BASE2_Exisits = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                }
+
+                strSql = " SELECT count(1) FROM ALL_TABLES where table_name = 'ETS_TRE_BASE3' ";
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    iETS_TRE_BASE3_Exisits = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                }
+
+
+                int iCount = 0;
+
+                foreach (DataRow dr in drs)
+                {
+
+                    if (dr["type"].ToString() != ((int)Enums.ColType.None).ToString())
+                    {
+
+
+                        strSql = " Select count(1) from TRE_MAPPING where TABLENAME = '" + strTabName + "' and COLNAME = '" + dr[0].ToString() + "'";
+                        if (Common.iDBType == (int)Enums.DBType.Oracle)
+                        {
+                            iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                        }
+                        else
+                        {
+                            iCount = int.Parse(((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                        }
+
+                        if (iCount == 0)
+                        {
+                            strSql = "INSERT INTO TRE_MAPPING (COLNAME, ISREQUIRED,TYPE,COLDATATYPE,TABLENAME) VALUES" + "('" + dr[0].ToString() + "',";
+                            if (dr["Required"] != DBNull.Value && (bool)dr["Required"])
+                                strSql += "1";
+                            else
+                                strSql += "0";
+
+                            strSql += "," + dr["type"].ToString() + ",'" + dr["dataType"].ToString() + "','" + strTabName + "')";
+
+                            if (Common.iDBType == (int)Enums.DBType.Oracle)
+                                ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                            else
+                                ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                        }
+                        else
+                        {
+                            strSql = "update TRE_MAPPING Set ISREQUIRED= ";
+                            if (dr["Required"] != DBNull.Value && (bool)dr["Required"])
+                                strSql += "1";
+                            else
+                                strSql += "0";
+
+                            strSql += ",TYPE=" + dr["type"].ToString() + ",COLDATATYPE='" + dr["dataType"].ToString() + "' where TABLENAME = '" + strTabName + "'";
+                            strSql += " and COLNAME = '" + dr[0].ToString() + "'";
+
+                            if (Common.iDBType == (int)Enums.DBType.Oracle)
+                                ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                            else
+                                ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql);
+                        }
+                        string strDType = "";
+                        if (dr["dataType"].ToString() == "System.String")
+                            strDType = " varchar(200)";
+                        else if (dr["dataType"].ToString() == "System.Decimal")
+                            strDType = " Number (18,2)";
+                        else if (dr["dataType"].ToString() == "System.DateTime")
+                            strDType = " datetime";
+                        else
+                            strDType = " Number (18,2)";
+
+                        if (dr["type"].ToString() == ((int)Enums.ColType.Input).ToString())
+                        {
+
+
+                            strSql = " Select count(1) from user_tab_columns where table_name = 'ETS_ADM_WEEKLY_A' and column_name = 'A_" + dr[0].ToString() + "'";
+                            if (Common.iDBType == (int)Enums.DBType.Oracle)
+                            {
+                                iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                            }
+                            if (iCount == 0)
+                            {
+                                if (iETS_ADM_WEEKLYExisits == 0)
+                                {
+                                    if (strCreateTString1 != "")
+                                        strCreateTString1 += ",";
+
+                                    if (strCreateBString1 != "")
+                                        strCreateBString1 += ",";
+
+
+                                    if (strBaseString1 != "")
+                                        strBaseString1 += ",";
+
+                                    if (strBase2String1 != "")
+                                        strBase2String1 += ",";
+
+
+                                    if (strBase3String1 != "")
+                                        strBase3String1 += ",";
+
+                                    strCreateTString1 += "A_" + dr[0].ToString() + strDType;
+                                    strCreateBString1 += "B_" + dr[0].ToString() + strDType;
+
+                                    strBaseString1 += "A_" + dr[0].ToString() + strDType + ",B_" + dr[0].ToString() + strDType + ",X_" + dr[0].ToString() + strDType + ",D_" + dr[0].ToString() + strDType;
+
+                                    strBase2String1 += "A_" + dr[0].ToString() + strDType + ",B_" + dr[0].ToString() + strDType + ",X_" + dr[0].ToString() + strDType + ",D_" + dr[0].ToString() + strDType + ",S_" + dr[0].ToString() + " varchar(200) ";
+
+                                    strBase3String1 += "A_" + dr[0].ToString() + strDType + ",B_" + dr[0].ToString() + strDType + ",X_" + dr[0].ToString() + strDType + ",D_" + dr[0].ToString() + strDType + ",S_" + dr[0].ToString() + " varchar(200) ,P_" + dr[0].ToString() + strDType;
+
+                                }
+                                else
+                                {
+
+
+                                    strSql = " Alter Table ETS_ADM_WEEKLY_A add A_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                    strSql = " Alter Table ETS_ADM_WEEKLY_B add B_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+
+                                    //Base
+                                    strSql = " Alter Table ETS_TRE_BASE add A_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                    strSql = " Alter Table ETS_TRE_BASE add B_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                    strSql = " Alter Table ETS_TRE_BASE add X_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                    strSql = " Alter Table ETS_TRE_BASE add D_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                    //Base2
+                                    strSql = " Alter Table ETS_TRE_BASE2 add A_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                    strSql = " Alter Table ETS_TRE_BASE2 add B_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                    strSql = " Alter Table ETS_TRE_BASE2 add X_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                    strSql = " Alter Table ETS_TRE_BASE2 add D_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                    strSql = " Alter Table ETS_TRE_BASE2 add S_" + dr[0].ToString() + " varchar(200) ";
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                    //Base3
+                                    strSql = " Alter Table ETS_TRE_BASE3 add A_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                    strSql = " Alter Table ETS_TRE_BASE3 add B_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                    strSql = " Alter Table ETS_TRE_BASE3 add X_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                    strSql = " Alter Table ETS_TRE_BASE3 add D_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                    strSql = " Alter Table ETS_TRE_BASE3 add S_" + dr[0].ToString() + " varchar(200) ";
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                    strSql = " Alter Table ETS_TRE_BASE3 add P_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                }
+                            }
+
+                            strSql = " Select count(1) from user_tab_columns where table_name = 'ETS_TRE_X_SELL_PNTL' and column_name = 'X_" + dr[0].ToString() + "'";
+                            if (Common.iDBType == (int)Enums.DBType.Oracle)
+                            {
+                                iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                            }
+                            if (iCount == 0)
+                            {
+                                if (iETS_TRE_X_SELL_PNTLExisits == 0)
+                                {
+                                    if (strSellPtnlTableString != "")
+                                        strSellPtnlTableString += ",";
+
+                                    if (strSellPtnlUserTableString != "")
+                                        strSellPtnlUserTableString += ",";
+
+                                    strSellPtnlTableString += "X_" + dr[0].ToString() + strDType;
+
+                                }
+                                else
+                                {
+                                    strSql = " Alter Table ETS_TRE_X_SELL_PNTL add X_" + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                }
+                            }
+                        }
+                        else if (dr["type"].ToString() == ((int)Enums.ColType.Segment).ToString())
+                        {
+
+                            strSql = " Select count(1) from user_tab_columns where table_name = 'ETS_ADM_WEEKLY_A' and column_name = '" + dr[0].ToString() + "'";
+                            if (Common.iDBType == (int)Enums.DBType.Oracle)
+                            {
+                                iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                            }
+                            if (iCount == 0)
+                            {
+                                if (iETS_ADM_WEEKLYExisits == 0)
+                                {
+                                    if (strSegmentString != "")
+                                    {
+                                        strSegmentString += ",";
+                                    }
+
+                                    strSegmentString += dr[0].ToString() + strDType;
+                                }
+                                else
+                                {
+                                    strSql = " Alter Table ETS_ADM_WEEKLY_A add " + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                }
+                            }
+                        }
+                        else if (dr["type"].ToString() == ((int)Enums.ColType.Key).ToString())
+                        {
+                            strSql = " Select count(1) from user_tab_columns where table_name = 'ETS_ADM_WEEKLY_A' and column_name = '" + dr[0].ToString() + "'";
+                            if (Common.iDBType == (int)Enums.DBType.Oracle)
+                            {
+                                iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                            }
+                            if (iCount == 0)
+                            {
+                                if (iETS_ADM_WEEKLYExisits == 0)
+                                {
+                                    if (strKeyString != "")
+                                    {
+                                        strKeyString += ",";
+                                    }
+
+                                    strKeyString += dr[0].ToString() + strDType;
+                                }
+                                else
+                                {
+                                    strSql = " Alter Table ETS_ADM_WEEKLY_A add " + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                    strSql = " Alter Table ETS_ADM_WEEKLY_B add " + dr[0].ToString() + strDType;
+                                    ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                                }
+                            }
+
+                        }
+
+                    }
+                    else
+                    {
+                        strSql = " Delete from TRE_MAPPING where TABLENAME = '" + strTabName + "' and COLNAME = '" + dr[0].ToString() + "'";
+                        ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+
+                        if (iETS_ADM_WEEKLYExisits > 0)
+                        {
+                            strSql = " Select count(1) from user_tab_columns where table_name = 'ETS_ADM_WEEKLY_A' and column_name = 'A_" + dr[0].ToString() + "'";
+                            if (Common.iDBType == (int)Enums.DBType.Oracle)
+                            {
+                                iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                            }
+                            if (iCount > 0)
+                            {
+                                strSql = " Alter Table ETS_ADM_WEEKLY_A drop column A_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                strSql = " Alter Table ETS_ADM_WEEKLY_B drop column B_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+
+                                strSql = " Alter Table ETS_TRE_BASE drop column A_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                strSql = " Alter Table ETS_TRE_BASE drop column B_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                strSql = " Alter Table ETS_TRE_BASE drop column D_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                strSql = " Alter Table ETS_TRE_BASE drop column X_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+
+
+                                strSql = " Alter Table ETS_TRE_BASE2 drop column A_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                strSql = " Alter Table ETS_TRE_BASE2 drop column B_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                strSql = " Alter Table ETS_TRE_BASE2 drop column D_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                strSql = " Alter Table ETS_TRE_BASE2 drop column X_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                strSql = " Alter Table ETS_TRE_BASE2 drop column S_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+
+                                strSql = " Alter Table ETS_TRE_BASE3 drop column A_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                strSql = " Alter Table ETS_TRE_BASE3 drop column B_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                strSql = " Alter Table ETS_TRE_BASE3 drop column D_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                strSql = " Alter Table ETS_TRE_BASE3 drop column X_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                                strSql = " Alter Table ETS_TRE_BASE3 drop column S_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+
+                                strSql = " Alter Table ETS_TRE_BASE3 drop column P_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                            }
+
+                            strSql = " Select count(1) from user_tab_columns where table_name = 'ETS_ADM_WEEKLY_A' and column_name = '" + dr[0].ToString() + "'";
+                            if (Common.iDBType == (int)Enums.DBType.Oracle)
+                            {
+                                iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                            }
+                            if (iCount > 0)
+                            {
+                                strSql = " Alter Table ETS_ADM_WEEKLY_A drop column " + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                            }
+
+                            strSql = " Select count(1) from user_tab_columns where table_name = 'ETS_ADM_WEEKLY_B' and column_name = '" + dr[0].ToString() + "'";
+                            if (Common.iDBType == (int)Enums.DBType.Oracle)
+                            {
+                                iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                            }
+                            if (iCount > 0)
+                            {
+                                strSql = " Alter Table ETS_ADM_WEEKLY_B drop column " + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                            }
+
+                            strSql = " Select count(1) from user_tab_columns where table_name = 'ETS_TRE_BASE' and column_name = '" + dr[0].ToString() + "'";
+                            if (Common.iDBType == (int)Enums.DBType.Oracle)
+                            {
+                                iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                            }
+                            if (iCount > 0)
+                            {
+                                strSql = " Alter Table ETS_TRE_BASE drop column " + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                            }
+
+                            strSql = " Select count(1) from user_tab_columns where table_name = 'ETS_TRE_BASE2' and column_name = '" + dr[0].ToString() + "'";
+                            if (Common.iDBType == (int)Enums.DBType.Oracle)
+                            {
+                                iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                            }
+                            if (iCount > 0)
+                            {
+                                strSql = " Alter Table ETS_TRE_BASE2 drop column " + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                            }
+                            strSql = " Select count(1) from user_tab_columns where table_name = 'ETS_TRE_BASE3' and column_name = '" + dr[0].ToString() + "'";
+                            if (Common.iDBType == (int)Enums.DBType.Oracle)
+                            {
+                                iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                            }
+                            if (iCount > 0)
+                            {
+                                strSql = " Alter Table ETS_TRE_BASE3 drop column " + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+                            }
+                        }
+                        if (iETS_TRE_X_SELL_PNTLExisits > 0)
+                        {
+                            strSql = " Select count(1) from user_tab_columns where table_name = 'ETS_TRE_X_SELL_PNTL' and column_name = 'X_" + dr[0].ToString() + "'";
+                            if (Common.iDBType == (int)Enums.DBType.Oracle)
+                            {
+                                iCount = int.Parse(((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSql));
+                            }
+                            if (iCount > 0)
+                            {
+                                strSql = " Alter Table ETS_TRE_X_SELL_PNTL drop column X_" + dr[0].ToString();
+                                ((OraDBManager)Common.dbMgr).ExecuteNonQuery(CommandType.Text, strSql);
+
+                            }
+                        }
+
+
+                    }
+                }
+
+                if (iETS_ADM_WEEKLYExisits == 0 && strCreateTString1 != "")
+                {
+                    strCreateTString += "TIMEPERIOD_ID number";
+
+                    if (strKeyString != "")
+                        strCreateTString += "," + strKeyString;
+                    if (strSegmentString != "")
+                        strCreateTString += "," + strSegmentString;
+
+                    strCreateTString += "," + strCreateTString1 + ")";
+
+
+                    strCreateBString += "TIMEPERIOD_ID number";
+                    if (strKeyString != "")
+                        strCreateBString += "," + strKeyString;
+
+                    strCreateBString += "," + strCreateBString1 + ")";
+
+
+                    if (Common.iDBType == (int)Enums.DBType.Oracle)
+                    {
+                        ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strCreateTString);
+                        ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strCreateBString);
+                    }
+                    else
+                    {
+                        ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strCreateTString);
+                        ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strCreateBString);
+                    }
+                }
+                string strKeySegmentString = "";
+                if (iETS_TRE_BASE_Exisits == 0 && strBaseString1 != "")
+                {
+
+
+                    if (strKeyString != "")
+                        strKeySegmentString += strKeyString;
+                    if (strSegmentString != "")
+                        strKeySegmentString += "," + strSegmentString;
+
+                    strBaseString += strKeySegmentString + "," + strBaseString1 + ")";
+
+                    strBase2String += strKeySegmentString + "," + strBase2String1 + ")";
+
+                    strBase3String += strKeySegmentString + "," + strBase3String1 + ")";
+
+
+                    if (Common.iDBType == (int)Enums.DBType.Oracle)
+                    {
+                        ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strBaseString);
+                        ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strBase2String);
+                        ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strBase3String);
+                    }
+                    else
+                    {
+                        ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strBaseString);
+                        ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strBase2String);
+                        ((DBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strBase3String);
+                    }
+                }
+
+                if (iETS_TRE_X_SELL_PNTLExisits == 0 && strSellPtnlTableString != "")
+                {
+                    if (strSellPtnlTableString != "")
+                        strSellPtnlTableString = "CREATE TABLE ETS_TRE_X_SELL_PNTL(TIMEPERIOD varchar2(50),SEGMENTCOLNAME varchar(50),CURRENTSEGMENT VARCHAR(50), " + strSellPtnlTableString + ")";
+
+                    if (Common.iDBType == (int)Enums.DBType.Oracle)
+                    {
+                        ((OraDBManager)Common.dbMgr).ExecuteScalar(CommandType.Text, strSellPtnlTableString);
+                    }
+
+
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public DataTable fnGetTableNames()
+        {
+            try
+            {
+                DataTable dt;
+                string strSql = "";
+
+
+
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                {
+                    strSql = "select TName from tab WHERE TABTYPE = 'TABLE' AND  TName not like 'APEX%' AND TName not like 'BIN%' AND TName not like 'DEMO%'";
+                    dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                }
+                else
+                {
+                    dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSql);
+                }
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            //
+        }
+        public DataTable fnCreateColTypes()
+        {
+            try
+            {
+                DataTable dtTypes = new DataTable();
+                dtTypes.Columns.Add(new DataColumn("TypeId", typeof(int)));
+                dtTypes.Columns.Add(new DataColumn("Type", typeof(string)));
+                dtTypes.Rows.Add(((int)Enums.ColType.Key).ToString(), "Key");
+                dtTypes.Rows.Add(((int)Enums.ColType.Input).ToString(), "Input");
+                dtTypes.Rows.Add(((int)Enums.ColType.Time).ToString(), "Time");
+                dtTypes.Rows.Add(((int)Enums.ColType.Segment).ToString(), "Segment");
+                dtTypes.Rows.Add(((int)Enums.ColType.None).ToString(), "None");
+                return dtTypes;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public bool fnIsTREDetailsMapped()
+        {
+            try
+            {
+                DataTable dt;
+                string strSQl = "Select * from TRE_MAPPING";
+                if (Common.iDBType == (int)Enums.DBType.Oracle)
+                    dt = ((OraDBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQl);
+                else
+                {
+                    dt = ((DBManager)Common.dbMgr).ExecuteDataTable(CommandType.Text, strSQl);
+                }
+                if (dt.Rows.Count > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+    }
+}

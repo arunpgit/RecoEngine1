@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{413C481F-44B5-4406-8F23-3019E9AC41AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CustomColumns</RootNamespace>
+    <AssemblyName>CustomColumns</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <BaseIntermediateOutputPath>$(OutputPath)obj\</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)\</IntermediateOutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Build\$(Configuration)\</OutputPath>
+    <BaseIntermediateOutputPath>$(OutputPath)obj\</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)\</IntermediateOutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CalithaLib">
+      <HintPath>ExternalReferences\GoldParser\CalithaLib.dll</HintPath>
+    </Reference>
+    <Reference Include="GoldParserEngine">
+      <HintPath>ExternalReferences\GoldParser\GoldParserEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Comparers.cs" />
+    <Compile Include="Key.cs" />
+    <Compile Include="Data\DataColumn.cs" />
+    <Compile Include="Data\DataExpressions.cs" />
+    <Compile Include="Data\DataRow.cs" />
+    <Compile Include="Data\DataSource.cs" />
+    <Compile Include="Expressions\Functions.cs" />
+    <Compile Include="Expressions\GoldParser\Generated.cs" />
+    <Compile Include="Expressions\GrammarRules.cs" />
+    <Compile Include="Expressions\Helpers.cs" />
+    <Compile Include="Expressions\Parser.cs" />
+    <Compile Include="Expressions\SymbolRules.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimSort\ArrayTimSort.cs" />
+    <Compile Include="TimSort\ListTimSort.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Expressions\GoldParser\Generated.cgt" />
+    <EmbeddedResource Include="Expressions\GoldParser\Grammar.grm" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TimSort\License.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
